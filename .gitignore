@@ -1,0 +1,15 @@
+# Environments
+.env
+.venv
+env/
+venv/
+
+# add the raw data to ignore
+
+__pycache__/
+*.pyc
+
+.vscode/
+.DS_Store
+
+notes.md
