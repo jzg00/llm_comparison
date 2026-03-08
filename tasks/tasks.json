@@ -1,0 +1,5 @@
+{
+    "task_id": "Palindrome Check",
+    "prompt": "Write a Python function that determines whether a string is a palindrome. Ignore non-alphanumeric characters and case",
+    "category": "DSA"
+}  
