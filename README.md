@@ -10,7 +10,6 @@ The current latest iteration of default models from ChatGPT and Claude are used:
 + Claude - Sonnet 4.6
 
 
-
 #### Metrics
 + **Pylint Score** - Quality score based on errors, potential issues, and compliance to PEP8 style guide
 
