@@ -4,7 +4,7 @@
 env/
 venv/
 
-# add the raw data to ignore
+data/raw/
 
 __pycache__/
 *.pyc
