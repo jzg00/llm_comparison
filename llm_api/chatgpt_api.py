@@ -23,12 +23,22 @@ def call_chatgpt(prompt: str, model: str = 'gpt-5.3-chat-latest') -> dict:
 )
     return completion.choices[0].message.content
 
-# write function to save response in data/raw/chatgpt
+
+def save_chatgpt(task_id: str, response: dict, run_number: int = 1):
+
+    os.makedirs("data/raw/chatgpt", exist_ok=True)
+
+    filename = f"data/raw/chatgpt/{task_id}_run{run_number}.json"
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(response, f, indent=2)
+
+    print(f"response saved to {filename}")
 
 
 # quick test
 if __name__ == "__main__":
     example_prompt = "Say hello"
-    task_id = "001"
+    task_id = "example"
     response = call_chatgpt(example_prompt)
     print(response)
+    save_chatgpt(task_id, response)
