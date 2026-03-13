@@ -21,16 +21,24 @@ def call_chatgpt(prompt: str, model: str = 'gpt-5.3-chat-latest') -> dict:
     ]
     # temperature control not supported for this model
 )
-    return completion.choices[0].message.content
+    return completion
 
 
-def save_chatgpt(task_id: str, response: dict, run_number: int = 1):
+def save_chatgpt(task_id: str, prompt: str, completion, run_number: int = 1):
 
     os.makedirs("data/raw/chatgpt", exist_ok=True)
 
+    data = {
+        "task_id": task_id,
+        "model": completion.model,
+        "run_number": run_number,
+        "prompt": prompt,
+        "response": completion.choices[0].message.content
+    }
+
     filename = f"data/raw/chatgpt/{task_id}_run{run_number}.json"
     with open(filename, "w", encoding="utf-8") as f:
-        json.dump(response, f, indent=2)
+        json.dump(data, f, indent=2)
 
     print(f"response saved to {filename}")
 
@@ -41,4 +49,4 @@ if __name__ == "__main__":
     task_id = "example"
     response = call_chatgpt(example_prompt)
     print(response)
-    save_chatgpt(task_id, response)
+    # save_chatgpt(task_id, response)

@@ -12,4 +12,4 @@ for task in tasks:
     # extract code
 
     chatgpt_resp = call_chatgpt(prompt)
-    save_chatgpt(task_id, chatgpt_resp) # responses are wrapped in markdown fences. need to extract / clean raw responses before linting, etc.
+    save_chatgpt(task_id, prompt, chatgpt_resp) # responses are wrapped in markdown fences. need to extract / clean raw responses before linting, etc.
