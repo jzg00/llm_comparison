@@ -4,7 +4,16 @@
 env/
 venv/
 
-data/raw/
+# hide data contents but keep folder structure
+data/raw/chatgpt/*
+data/raw/claude/*
+data/processed/chatgpt/*
+data/processed/claude/*
+
+!data/raw/chatgpt/.gitkeep
+!data/raw/claude/.gitkeep
+!data/processed/chatgpt/.gitkeep
+!data/processed/claude/.gitkeep
 
 __pycache__/
 *.pyc
