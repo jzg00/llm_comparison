@@ -18,4 +18,3 @@ The current latest iteration of default models from ChatGPT and Claude are used:
 + **Tests Passed** - Unit testing to check functionality and correctness of logic
 
 + **Lines of Code (LOC)** - Used as a normalizer (e.g violations per 100 LOC). Also provides context on conciseness vs verbosity of each LLM
-
