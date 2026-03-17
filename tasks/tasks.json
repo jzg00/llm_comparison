@@ -3,5 +3,17 @@
         "task_id": "palindrome_check",
         "prompt": "Write a Python function that determines whether a string is a palindrome. Ignore non-alphanumeric characters and case",
         "category": "DSA"
-    } 
+    }, 
+
+    {
+        "task_id": "binary_search",
+        "prompt": "Write a Python function that returns the index of the target number in an array of integers. The array is sorted in ascending order",
+        "category": "DSA"
+    },
+
+    {
+        "task_id": "rest_api_endpoint",
+        "prompt": "Write a REST API endpoint for user authentication with proper error handling",
+        "category": "API"
+    }
 ]
