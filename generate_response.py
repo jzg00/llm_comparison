@@ -1,4 +1,5 @@
 from llm_api.chatgpt_api import call_chatgpt, save_chatgpt
+from llm_api.claude_api import call_claude, save_claude
 import json
 
 # load tasks
@@ -12,5 +13,6 @@ for task in tasks:
 
     chatgpt_resp = call_chatgpt(prompt)
     save_chatgpt(task_id, prompt, chatgpt_resp)
-
-    # claude api call & save here
+    
+    claude_resp = call_claude(prompt)
+    save_claude(task_id, prompt, claude_resp)
