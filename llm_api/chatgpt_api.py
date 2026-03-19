@@ -10,17 +10,15 @@ client = OpenAI() # api_key=os.environ.get("OPENAI_API_KEY") is default paramete
 
 
 def call_chatgpt(prompt: str, model: str = 'gpt-5.3-chat-latest') -> dict:
-    """
-    Send task prompts to chatgpt and return raw responses as dict
-    """
+
     completion = client.chat.completions.create(
-    model = model,
-    messages=[
-        {"role": "developer", "content": "You are a helpful assistant. Respond with raw Python code only. No markdown, no explanations."},
-        {"role": "user", "content": prompt}
-    ]
-    # temperature control not supported for this model
-)
+        model = model,
+        messages=[
+            {"role": "developer", "content": "You are a helpful assistant. Respond with raw Python code only. No markdown, no explanations."},
+            {"role": "user", "content": prompt}
+        ]
+        # temperature control not supported for this model
+    )
     return completion
 
 
