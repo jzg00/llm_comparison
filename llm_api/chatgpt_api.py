@@ -14,7 +14,7 @@ def call_chatgpt(prompt: str, model: str = 'gpt-5.3-chat-latest') -> dict:
     completion = client.chat.completions.create(
         model = model,
         messages=[
-            {"role": "developer", "content": "You are a helpful assistant. Respond with raw Python code only. No markdown, no explanations."},
+            {"role": "developer", "content": "You are a helpful assistant. Do not use markdown. Do not wrap code in triple backticks. Return only raw Python code with no formatting, no preamble, and no explanation."},
             {"role": "user", "content": prompt}
         ]
         # temperature control not supported for this model
