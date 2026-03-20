@@ -1,13 +1,23 @@
 # LLM Code Quality Analysis
 
-### Overview
+### Pipeline Overview
 This project generates responses from various large lanuage models (LLMs) prompted with coding tasks in Python. Their responses are evaluated and analyzed against Python quality standards and other metrics.
+
+***
+tasks/tasks.json 
+→ pipeline/generate_code.py 
+→ data/raw/{model}/ (JSON responses) 
+→ pipeline/extract_code.py 
+→ data/processed/{model}/ (.py files) 
+→ pipeline/run_linting.py 
+→ data/metrics/dataset.csv 
+***
 
 #### API / Models used
 LLM responses are generated through their repective APIs instead of through the web browser. This is to avoid personalized responses and to make the responses more deterministic.
 The current latest iteration of default models from ChatGPT and Claude are used:
 + ChatGPT (Chat Comlpletions API) - gpt-5.3-chat-latest
-+ Claude - Sonnet 4.6
++ Claude (Messages API) - Sonnet 4.6
 
 
 #### Metrics
