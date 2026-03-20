@@ -9,11 +9,13 @@ data/raw/chatgpt/*
 data/raw/claude/*
 data/processed/chatgpt/*
 data/processed/claude/*
+data/metrics/*
 
 !data/raw/chatgpt/.gitkeep
 !data/raw/claude/.gitkeep
 !data/processed/chatgpt/.gitkeep
 !data/processed/claude/.gitkeep
+!data/metrics/.gitkeep
 
 __pycache__/
 *.pyc
