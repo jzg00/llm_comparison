@@ -14,10 +14,13 @@ tasks/tasks.json
 ***
 
 #### API / Models evaluated
-LLM responses are generated through their repective APIs instead of through the web browser. This is to avoid personalized responses and to make the responses more deterministic.
-The current latest iteration of default models from ChatGPT and Claude are used:
+LLM responses are generated through their respective APIs instead of through the web browser. This is to avoid personalized responses and to make the responses more deterministic.
+The current latest iteration of **default** models from ChatGPT and Claude are used:
 + ChatGPT (Chat Comlpletions API) - gpt-5.3-chat-latest
 + Claude (Messages API) - Sonnet 4.6
+
+> **Note:** These aren't the top-tier coding models, but were selected to reflect how casual users rely on general-purpose chat models for everyday coding tasks.
+
 
 
 #### Metrics
