@@ -23,4 +23,23 @@ def run_pylint(file_path):
 
     return issues
 
-# function to summarize the pylint results
+# function to summarize the pylint metrics
+def summarize_pylint(issues):
+    counts = Counter(issue["type"] for issue in issues)
+
+    return {
+        "pylint_errors": counts.get("error", 0),
+        "pylint_warnings": counts.get("warning", 0),
+        "pylint_refactor": counts.get("refactor", 0),
+        "pylint_convention": counts.get("convention", 0),
+        "pylint_total": len(issues)
+    }
+
+
+
+# quick example test
+if __name__=="__main__":
+    file_path = "data/processed/chatgpt/binary_search_run1.py"
+    issues = run_pylint(file_path)
+    summary = summarize_pylint(issues)
+    print(summary)

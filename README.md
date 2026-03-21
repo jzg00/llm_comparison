@@ -13,7 +13,7 @@ tasks/tasks.json
 → data/metrics/dataset.csv 
 ***
 
-#### API / Models evaluated
+#### API / Models
 LLM responses are generated through their respective APIs instead of through the web browser. This is to avoid personalized responses and to make the responses more deterministic.
 The current latest iteration of **default** models from ChatGPT and Claude are used:
 + ChatGPT (Chat Comlpletions API) - gpt-5.3-chat-latest
