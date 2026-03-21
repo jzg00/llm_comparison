@@ -35,11 +35,10 @@ def summarize_pylint(issues):
         "pylint_total": len(issues)
     }
 
-
-
 # quick example test
 if __name__=="__main__":
     file_path = "data/processed/chatgpt/binary_search_run1.py"
     issues = run_pylint(file_path)
-    summary = summarize_pylint(issues)
-    print(summary)
+    # summary = summarize_pylint(issues)
+    # print(summary)
+    print(issues)
