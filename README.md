@@ -9,7 +9,7 @@ tasks/tasks.json
 → data/raw/{model}/ (JSON responses) 
 → pipeline/extract_code.py 
 → data/processed/{model}/ (.py files) 
-→ pipeline/run_linting.py 
+→ pipeline/run_metrics.py
 → data/metrics/dataset.csv 
 ***
 
