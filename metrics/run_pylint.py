@@ -1,11 +1,6 @@
-import os
 import json
 import subprocess
-import csv
 from collections import Counter
-
-PROCESSED_DIR = "data/processed" # folder that contains raw python code
-OUTPUT_FILE = "data/metrics/dataset.csv"
 
 # first run pylint to get results in json
 def run_pylint(file_path):
@@ -24,7 +19,7 @@ def run_pylint(file_path):
     return issues
 
 # function to summarize the pylint metrics
-def summarize_pylint(issues):
+def summarize_pylint(issues) -> dict:
     counts = Counter(issue["type"] for issue in issues)
 
     return {
@@ -36,9 +31,9 @@ def summarize_pylint(issues):
     }
 
 # quick example test
-if __name__=="__main__":
-    file_path = "data/processed/chatgpt/binary_search_run1.py"
-    issues = run_pylint(file_path)
-    # summary = summarize_pylint(issues)
-    # print(summary)
-    print(issues)
+# if __name__=="__main__":
+#     file_path = "data/processed/chatgpt/binary_search_run1.py"
+#     issues = run_pylint(file_path)
+#     # summary = summarize_pylint(issues)
+#     # print(summary)
+#     print(issues)
