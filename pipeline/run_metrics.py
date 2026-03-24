@@ -10,6 +10,7 @@ OUTPUT_FILE = "data/metrics/dataset.csv"
 # function to get metrics into a single dictionary
 def get_metrics(file_path) -> dict:
     metrics = {}
+
     # code metrics
     metrics.update(compute_loc(file_path)) # update() merges keys into the same dictionary
     # pylint metrics
@@ -39,5 +40,30 @@ def extract_metadata(file_path):
 
 
 # function to build dataset
-def main():
-    pass
+def build_dataset():
+    # list of dictionaries (row-wise)
+    rows = []
+
+    # iterate through processed .py files for each model
+    for model in os.listdir(PROCESSED_DIR):
+        model_path = os.path.join(PROCESSED_DIR, model)
+    
+        for file in os.listdir(model_path):
+            if not file.endswith(".py"):
+                continue
+        
+        file_path = os.path.join(model_path, file)
+
+        metadata = extract_metadata(file_path)
+
+        metrics = get_metrics(file_path)
+
+        row = metadata | metrics # merge dicts into one flat row
+        rows.append(row)
+
+    if rows:
+        df = pd.DataFrame(rows)
+        print(df) # quick test
+    
+if __name__=="__main__":
+    build_dataset()
