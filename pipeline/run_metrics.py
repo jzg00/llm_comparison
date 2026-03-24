@@ -29,7 +29,7 @@ def extract_metadata(file_path):
     # consider changing to load metadata from raw JSON instead
     name_parts = filename.replace(".py", "").split("_")
     task = "_".join(name_parts[:-1])
-    run = name_parts[-1]
+    run = name_parts[-1][-1] # might get rid of run numbers (unless multiple runs are done)
 
     return {
         "model": model,
