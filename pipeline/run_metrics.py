@@ -52,17 +52,18 @@ def build_dataset():
             if not file.endswith(".py"):
                 continue
         
-        file_path = os.path.join(model_path, file)
+            file_path = os.path.join(model_path, file)
 
-        metadata = extract_metadata(file_path)
+            metadata = extract_metadata(file_path)
 
-        metrics = get_metrics(file_path)
+            metrics = get_metrics(file_path)
 
-        row = metadata | metrics # merge dicts into one flat row
-        rows.append(row)
+            row = metadata | metrics # merge dicts into one flat row
+            rows.append(row)
 
     if rows:
         df = pd.DataFrame(rows)
+        # df.to_csv(OUTPUT_FILE, index=False)
         print(df) # quick test
     
 if __name__=="__main__":
