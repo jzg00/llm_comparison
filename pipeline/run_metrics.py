@@ -1,9 +1,9 @@
 import os
 import pandas as pd
-from metrics.code_metrics import *
+from metrics.code_metrics import compute_loc
 from metrics.run_pylint import run_pylint, summarize_pylint
 
-RAW_DIR = "data/raw"
+RAW_DIR = "data/raw" # use if metedata is extracted from raw JSON
 PROCESSED_DIR = "data/processed"
 OUTPUT_FILE = "data/metrics/dataset.csv"
 
@@ -23,7 +23,7 @@ def get_metrics(file_path) -> dict:
 def extract_metadata(file_path):
     parts = file_path.split(os.sep)
 
-    model = parts[2]
+    model = parts[1]
     filename = parts[-1]
 
     # consider changing to load metadata from raw JSON instead
