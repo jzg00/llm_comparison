@@ -35,7 +35,7 @@ def extract_metadata(file_path):
         "model": model,
         "task": task,
         "run": run,
-        "file_name": filename
+        # "file_name": filename
     }
 
 
@@ -48,7 +48,7 @@ def build_dataset():
     for model in os.listdir(PROCESSED_DIR):
         model_path = os.path.join(PROCESSED_DIR, model)
     
-        for file in os.listdir(model_path):
+        for file in os.listdir(model_path):     # consider using patlib glob to handle both subdirectory and filter traversal w/o nested loop
             if not file.endswith(".py"):
                 continue
         
@@ -63,7 +63,7 @@ def build_dataset():
 
     if rows:
         df = pd.DataFrame(rows)
-        # df.to_csv(OUTPUT_FILE, index=False)
+        # df.to_csv(OUTPUT_FILE, index=False) UNCOMMENT WHEN READY TO SAVE DATASET
         print(df) # quick test
     
 if __name__=="__main__":
