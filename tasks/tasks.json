@@ -14,6 +14,12 @@
     {
         "task_id": "rest_api_endpoint",
         "prompt": "Write a REST API endpoint for user authentication with proper error handling",
-        "category": "API"
+        "category": "Design"
+    },
+
+    {
+        "task_id": "task_scheduler",
+        "prompt": "Design a task scheduler that runs jobs at given intervals",
+        "category": "Design"   
     }
 ]

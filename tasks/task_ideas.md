@@ -26,7 +26,7 @@ Write a function that removes duplicate records from a list of dictionaries
 
 Write a function that returns the top N customers by total spending
 
-### API
+### Design
 
 #### 1. REST API Endpoint
 Write a REST API endpoint for user authentication with proper error handling
