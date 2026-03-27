@@ -11,7 +11,7 @@ def call_claude(prompt: str, model: str = 'claude-sonnet-4-6') -> dict:
 
     message = client.messages.create(
         model = model,
-        max_tokens=1024,
+        max_tokens=4096,
         system="You are a helpful assistant. Do not use markdown. Do not wrap code in triple backticks. Return only raw Python code with no formatting, no preamble, and no explanation.",
         messages =[
             {"role": "user", "content": prompt}

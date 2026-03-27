@@ -13,6 +13,7 @@ def call_chatgpt(prompt: str, model: str = 'gpt-5.3-chat-latest') -> dict:
 
     completion = client.chat.completions.create(
         model = model,
+        max_completion_tokens=4096,
         messages=[
             {"role": "developer", "content": "You are a helpful assistant. Do not use markdown. Do not wrap code in triple backticks. Return only raw Python code with no formatting, no preamble, and no explanation."},
             {"role": "user", "content": prompt}
