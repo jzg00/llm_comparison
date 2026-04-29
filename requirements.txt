@@ -1,0 +1,5 @@
+anthropic==0.85.0
+openai==2.26.0
+pandas==3.0.1
+pylint
+python-dotenv==1.2.2

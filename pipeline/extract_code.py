@@ -1,43 +1,30 @@
-import os
 import json
+from pathlib import Path
+from config import RAW_DIR, PROCESSED_DIR
+from utils import get_logger
 
-RAW_DIR = "data/raw"
-PROCESSED_DIR = "data/processed"
+logger = get_logger(__name__)
 
 
-def extract_code(filepath, output_dir):
-    """
-    Extract python code from a raw json and save as .py in data/processed
-    """
+def extract_code(filepath: Path, output_dir: Path) -> None:
     with open(filepath, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    code = data["response"].strip() # remove leading / trailing whitespaces
+    code = data["response"].strip()
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / filepath.with_suffix(".py").name
 
-    filename = os.path.basename(filepath) # e.g Path: data/raw/chatgpt/palindrome_check.json -> filename: 'palindrome_check.json'
-    base_name = os.path.splitext(filename)[0] # splits the name from the extension into tuple -> ('palindrome_check', '.json')
-    output_file = base_name + ".py" # becomes 'palindrome_check.py'
-    output_path = os.path.join(output_dir, output_file) # e.g 'data/processed/chatgpt/palindrome_check.py'
-
-    os.makedirs(output_dir, exist_ok=True)
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(code)
-
-    print(f"saved {output_path}")
+    output_path.write_text(code, encoding="utf-8")
+    logger.info("Extracted %s", output_path)
 
 
-def process_all_models():
- # loop through all model folders in data/raw
-    for model_folder in os.listdir(RAW_DIR):
-        raw_dir = os.path.join(RAW_DIR, model_folder)
-        processed_dir = os.path.join(PROCESSED_DIR, model_folder)
-
-        if os.path.isdir(raw_dir):
-            for filename in os.listdir(raw_dir):
-                if filename.endswith(".json"):
-                    filepath = os.path.join(raw_dir, filename)
-                    extract_code(filepath, processed_dir)
+def process_all_models() -> None:
+    for model_dir in RAW_DIR.iterdir():
+        if not model_dir.is_dir():
+            continue
+        processed_dir = PROCESSED_DIR / model_dir.name
+        for json_file in model_dir.glob("*.json"):
+            extract_code(json_file, processed_dir)
 
 
 if __name__ == "__main__":

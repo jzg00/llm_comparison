@@ -1,70 +1,45 @@
-import os
+from pathlib import Path
 import pandas as pd
+from config import PROCESSED_DIR, DATASET_FILE
+from utils import get_logger
 from metrics.code_metrics import compute_loc
 from metrics.run_pylint import run_pylint, summarize_pylint
 
-RAW_DIR = "data/raw" # use if metedata is extracted from raw JSON
-PROCESSED_DIR = "data/processed"
-OUTPUT_FILE = "data/metrics/dataset.csv"
+logger = get_logger(__name__)
 
-# function to get metrics into a single dictionary
-def get_metrics(file_path) -> dict:
+
+def extract_metadata(file_path: Path) -> dict:
+    model = file_path.parent.name
+    stem = file_path.stem  # e.g., "binary_search_run1"
+    task, _, run = stem.rpartition("_run")
+    return {"model": model, "task": task, "run": run}
+
+
+def get_metrics(file_path: Path) -> dict:
     metrics = {}
-
-    # code metrics
-    metrics.update(compute_loc(file_path)) # update() merges keys into the same dictionary
-    # pylint metrics
+    metrics.update(compute_loc(file_path))
     issues = run_pylint(file_path)
     metrics.update(summarize_pylint(issues))
-
     return metrics
 
-# function to get metadate
-def extract_metadata(file_path):
-    parts = file_path.split(os.sep)
 
-    model = parts[1]
-    filename = parts[-1]
-
-    # consider changing to load metadata from raw JSON instead
-    name_parts = filename.replace(".py", "").split("_")
-    task = "_".join(name_parts[:-1])
-    run = name_parts[-1][-1] # might get rid of run numbers (unless multiple runs are done)
-
-    return {
-        "model": model,
-        "task": task,
-        "run": run,
-        # "file_name": filename
-    }
-
-
-# function to build dataset
-def build_dataset():
-    # list of dictionaries (row-wise)
+def build_dataset() -> None:
     rows = []
 
-    # iterate through processed .py files for each model
-    for model in os.listdir(PROCESSED_DIR):
-        model_path = os.path.join(PROCESSED_DIR, model)
-    
-        for file in os.listdir(model_path):     # consider using patlib glob to handle both subdirectory and filter traversal w/o nested loop
-            if not file.endswith(".py"):
-                continue
-        
-            file_path = os.path.join(model_path, file)
+    for py_file in PROCESSED_DIR.glob("*/*.py"):
+        metadata = extract_metadata(py_file)
+        metrics = get_metrics(py_file)
+        rows.append(metadata | metrics)
 
-            metadata = extract_metadata(file_path)
+    if not rows:
+        logger.warning("No processed files found — dataset not written")
+        return
 
-            metrics = get_metrics(file_path)
+    DATASET_FILE.parent.mkdir(parents=True, exist_ok=True)
+    df = pd.DataFrame(rows)
+    df.to_csv(DATASET_FILE, index=False)
+    logger.info("Dataset written to %s (%d rows)", DATASET_FILE, len(df))
 
-            row = metadata | metrics # merge dicts into one flat row
-            rows.append(row)
 
-    if rows:
-        df = pd.DataFrame(rows)
-        df.to_csv(OUTPUT_FILE, index=False)
-        # print(df) # quick test
-    
-if __name__=="__main__":
+if __name__ == "__main__":
     build_dataset()
