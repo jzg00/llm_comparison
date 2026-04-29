@@ -63,8 +63,8 @@ def build_dataset():
 
     if rows:
         df = pd.DataFrame(rows)
-        # df.to_csv(OUTPUT_FILE, index=False) UNCOMMENT WHEN READY TO SAVE DATASET
-        print(df) # quick test
+        df.to_csv(OUTPUT_FILE, index=False)
+        # print(df) # quick test
     
 if __name__=="__main__":
     build_dataset()
